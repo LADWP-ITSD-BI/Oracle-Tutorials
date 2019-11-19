@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<!-- saved from url=(0089)https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <!-- Last updated: 10/18/16 -->
+    <!-- set the encoding of your site -->
+    <!-- set the viewport width and initial-scale on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Adding Charts to your Existing Database Application in Oracle
+      Application Express 5.1</title>
+    <!-- Add short description of the OBE for displaying in  search results, etc.-->
+    <meta name="description" content="In this tutorial, you learn how to add charts to your existing database application using Oracle Application Express 5.1.">
+    <link href="./AddingChartstoApplicationExpress5.1_files/css" rel="stylesheet" type="text/css">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/glyphicons.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/all.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/fusiondoc-obe.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/obe.css">
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/print.css">
+    <!-- Code Mirror stylesheet -->
+    <link type="text/css" rel="stylesheet" href="./AddingChartstoApplicationExpress5.1_files/codemirror.css">
+    <!-- include jQuery library -->
+    <iframe src="javascript:void(0)" title="" style="width: 0px; height: 0px; border: 0px; display: none;" src="./AddingChartstoApplicationExpress5.1_files/saved_resource.html"></iframe><script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery.min.js.download"></script>
+    <script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script><script src="./AddingChartstoApplicationExpress5.1_files/jquery-1.11.1.min.js.download"></script>
+    <script src="./AddingChartstoApplicationExpress5.1_files/bootstrap.js.download"></script>
+    <!-- include custom JavaScript -->
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/ZeroClipboard.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery.main.js.download"></script><style type="text/css">.js-tab-hidden{position:absolute !important;left:-9999px !important;top:-9999px !important;/*display:block !important*/}</style>
+    <!-- Load jQuery, SimpleModal and Basic JS files -->
+    <!--[if lt IE 9]>
+          <script type="text/javascript" src="js/modernizr.custom.80798.js"></script>        <![endif]-->
+    <!--  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery.XDomainRequest.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery.cookie.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery-queryParser.min.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery-ui.min.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/jquery.visible.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/hooks.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/purl.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/basic.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/obe-scrollfixed.js.download"></script>
+    <!--script type="text/javascript" src="js/REST.UI.js"></script-->
+    <!--end obe scripts -->
+    <script type="text/javascript">
+		if (navigator.userAgent.match(/IEMobile\/10\.0/) || navigator.userAgent.match(/MSIE 10.*Touch/)) {
+			var msViewportStyle = document.createElement('style')
+			msViewportStyle.appendChild(
+				document.createTextNode(
+					'@-ms-viewport{width:auto !important}'
+				)
+			)
+			document.querySelector('head').appendChild(msViewportStyle)
+		}
+</script> <script src="./AddingChartstoApplicationExpress5.1_files/jquery-ui-1.10.4.custom.js.download"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        window.location.origin.indexOf('https://') >= 0 || window.location.origin.indexOf('http://') >= 0 ? $('.vm-only').hide() : $('.oll-only').hide();
+    });
+</script> 
+  <script>!function(){function o(n,i){if(n&&i)for(var r in i)i.hasOwnProperty(r)&&(void 0===n[r]?n[r]=i[r]:n[r].constructor===Object&&i[r].constructor===Object?o(n[r],i[r]):n[r]=i[r])}try{var n=decodeURIComponent("");if(n.length>0&&window.JSON&&"function"==typeof window.JSON.parse){var i=JSON.parse(n);void 0!==window.BOOMR_config?o(window.BOOMR_config,i):window.BOOMR_config=i}}catch(r){window.console&&"function"==typeof window.console.error&&console.error("mPulse: Could not parse configuration",r)}}();</script>
+  <script>!function(e){var a="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,a="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="DXNLE-YBWWY-AR74T-WMD99-77VRA",function(){function n(a){e.BOOMR_onload=a&&a.timeStamp||(new Date).getTime()}if(!e.BOOMR||!e.BOOMR.version&&!e.BOOMR.snippetExecuted){e.BOOMR=e.BOOMR||{},e.BOOMR.snippetExecuted=!0;var i,o,r,_=document.createElement("iframe");if(e[t])e[t]("load",n,!1);else if(e.attachEvent)e.attachEvent("onload",n);_.src="javascript:void(0)",_.title="",_.role="presentation",(_.frameElement||_).style.cssText="width:0;height:0;border:0;display:none;",r=document.getElementsByTagName("script")[0],r.parentNode.insertBefore(_,r);try{o=_.contentWindow.document}catch(O){i=document.domain,_.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",o=_.contentWindow.document}o.open()._l=function(){var e=this.createElement("script");if(i)this.domain=i;e.id="boomr-if-as",e.src=a+"DXNLE-YBWWY-AR74T-WMD99-77VRA",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(e)},o.write("<bo"+'dy onload="document._l();">'),o.close()}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var a=""=="true"?1:0,t="",n="q3ewayaxb5mkoxoo6ucq-f-d2f2436f4-clientnsv4-s.akamaihd.net",i={"ak.v":25,"ak.cp":"82485","ak.ai":parseInt("165266",10),"ak.ol":"0","ak.cr":16,"ak.ipv":4,"ak.proto":"h2","ak.rid":"207ee01","ak.r":32291,"ak.a2":a,"ak.m":"dscx","ak.n":"essl","ak.bpcip":"134.201.96.0","ak.cport":17174,"ak.gh":"23.55.36.183","ak.quicv":"","ak.tlsv":"tls1.2","ak.0rtt":"","ak.csrc":"-","ak.acc":"","ak.t":"1573844229"};if(""!==t)i["ak.ruds"]=t;var o={i:!1,av:function(a){var t="http.initiator";if(a&&(!a[t]||"spa_hard"===a[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:n,init:function(){if(!o.i){var e=BOOMR.subscribe;e("before_beacon",o.av,null,null),e("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+  <body> <noscript>
+<div>JavaScript must be enabled for the correct page display</div>
+</noscript><!-- main container of all the page elements -->
+    <div id="wrapper">
+      <!-- allow a user to go to the main content of the page --> <a class="accessibility skipto" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#content">Skip to Content</a>
+      <!-- header of the page -->
+      <header id="header">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="holder">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <!-- page logo -->
+                <div class="logo pull-left" itemscope="" itemtype="http://schema.org/Organization">
+                  <span class="name-organization" itemprop="name">Oracle</span>
+                  <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#"> <span data-picture="" data-alt="Oracle Logo"> <span data-src="./AddingChartstoApplicationExpress5.1_files/logo.png" data-width="221" data-height="20" data-alt="Oracle Logo"></span> <span data-src="./AddingChartstoApplicationExpress5.1_files/logo-2x.png" data-width="221" data-height="20" data-media="(-webkit-min-device-pixel-ratio:1.5), (min-resolution:144dpi)"><img alt="Oracle Logo" width="221" height="20" src="./AddingChartstoApplicationExpress5.1_files/logo-2x.png"></span>
+                      <!--[if (lt IE 9) & (!IEMobile)]>
+                      <span data-src="./AddingChartstoApplicationExpress5.1_files/logo.png"></span>                  <![endif]-->
+                      <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                      <noscript>
+              <img src="./AddingChartstoApplicationExpress5.1_files/logo.png" alt="Oracle Logo" height="20" width="221">
+              </noscript> </span> </a> </div>
+              </div>
+              <div class="navbar-right"> </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <!-- contain main informative part of the site -->
+      <main role="main" id="main">
+        <div class="holder">
+          <div class="container-fluid">
+            <h1>Adding Charts to your Existing Database Application in Oracle
+              Application Express 5.1</h1>
+            <!-- contain the main content of the page -->
+            <div class="content-holder">
+              <div class="content" style="min-height: 550px;">
+                <!-- tabs content holder -->
+                <div class="slide-holder left-tab-holder js-tab-hidden">
+                  <!-- tab element -->
+                  <div id="tab1" class="js-tab-hidden" style="display: none;">
+                    <div class="slide-frame">
+                      <div id="left-nav-container">
+                        <div class="left-nav-element">
+                          <div id="navToc" title="Topic List">
+                            <ul>
+                            <li><a title="Before You Begin" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#overview">Before You Begin</a></li><li><a title="Adding a Chart to a New Page" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section1">Adding a Chart to a New Page</a></li><li><a title="Adding a Chart in Page Designer" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section2">Adding a Chart in Page Designer</a></li><li><a title="Editing Chart Attributes in Page Designer" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section3">Editing Chart Attributes in Page Designer</a></li><li><a title="Switching a Chart Type in Page Designer" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section4">Switching a Chart Type in Page Designer</a></li><li><a title="Creating a Dynamic Action to Refresh the Chart" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section5">Creating a Dynamic Action to Refresh the Chart</a></li><li><a title="Using a Custom JavaScript in the Chart" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#section6">Using a Custom JavaScript in the Chart</a></li><li><a title="Want to Learn More?" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#summary">Want to Learn More?</a></li></ul>
+                          </div>
+                        </div>
+                      </div>
+                      <br style="clear:both">
+                    </div>
+                  </div>
+                  <!-- tab element -->
+                  <div id="tab2" class="js-tab-hidden" style="display: none;">
+                    <div class="slide-frame">
+                      <div class="left-nav-element">
+                        <div id="toolbar">
+                          <h3>Options</h3>
+                          <button id="tglTopicBtn" class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Expand
+                            All Topics</span></button> <br>
+                          <br>
+                          <button id="tglImageBtn" class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Hide All Media</span></button> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- tabs content holder -->
+                <div class="slide-holder right right-tab-holder js-tab-hidden"> </div>
+                <div class="left-panel pull-left">
+                  <!-- tabs switcher -->
+                  <ul class="tabset-panel list-unstyled text-center" style="top: 0px;">
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#tab1" class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-list"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Table of Contents</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                    <!-- -->
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#tab2" class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-cogwheels"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Options</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#tab3" class="opener tooltip-link print" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-print"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Print</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                  </ul>
+                </div>
+                <div class="content-right" id="content">
+                  <article>
+                    <div id="container" class="" style="top: 54px; min-height: 0px;">
+                      <!-- START Article -->
+                      <section>
+                        <a id="overview">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Before You Begin</span></h2>
+                        <div style="display: none;">
+                          <h4>Purpose</h4>
+                          <p>In this tutorial, you learn how to add charts to
+                            your existing database application using Oracle
+                            Application Express 5.1.</p>
+                          <h4>Time to Complete</h4>
+                          <p>Approximately 20 minutes</p>
+                          <h4>Background</h4>
+                          <p>Oracle Application Express is a rapid web
+                            application development tool for the Oracle
+                            Database. Using only a web browser and limited
+                            programming experience, you can develop and deploy
+                            professional applications that are both fast and
+                            secure. Oracle Application Express is available with
+                            the Oracle Database, whether it's on-premises or in
+                            the Oracle Cloud.</p>
+                          <p>In this tutorial, you use Oracle Application
+                            Express Release 5.1 to create and run a database
+                            application. In release 5.1, charts in Oracle
+                            Application Express are powered by the Oracle JET
+                            charting library. Oracle JET charts are a component
+                            of the Oracle JavaScript Extension Toolkit (JET), an
+                            open source toolkit based on modern JavaScript, CSS3
+                            and HTML5 design and development principles. Oracle
+                            JET charts are fast, highly customizable and
+                            versatile. Charts are fully HTML5 capable and work
+                            on any modern browser, regardless of platform,
+                            screen size, or features.</p>
+                          <h4>What Do You Need?</h4>
+                          <ul>
+                            <li> Have access to an Oracle Database 11g or later
+                              release, either on-premises or in a Database Cloud
+                              Service.</li>
+                            <li>Install Oracle Application Express Release 5.1
+                              into your Oracle Database (for on-premises only).
+                              If you are using Oracle Database Cloud Service,
+                              the application is already installed for you.</li>
+                            <li>Provision at least one Oracle Application
+                              Express user. See <a href="http://www.oracle.com/pls/topic/lookup?ctx=E59726-01&amp;id=AEADM150" target="_blank">Creating
+                                New User Accounts</a> in Oracle Application
+                              Express Administration Guide.<br>
+                            </li>
+                            <li style="box-sizing: border-box; font-size: 14.0182px; margin-top: 0.4em; margin-bottom: 0.4em;">Have
+                              access to the HR tables. If necessary, download
+                              and install HR Sample Objects available from <a href="https://github.com/oracle/db-sample-schemas" target="_blank">github.com</a>.</li>
+                            <li>
+                              <p>Have the <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/files.zip">files.zip</a>
+                                file downloaded and extracted into your working
+                                directory.</p>
+                            </li>
+                            <li>
+                              <p>Have the <code>f100.sql</code> application
+                                imported to your workspace along with the
+                                supporting objects.</p>
+                            </li>
+                          </ul>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section1">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Adding a Chart to a New Page</span></h2>
+                        <div style="display: none;">
+                          <p>In this section, you create a Pie chart in a new
+                            page.</p>
+                          <ol>
+                            <li class="vm-only" style="font-weight: bold; display: none;"><span>
+                              <p>In the Application Express login page, enter
+                                the following login credentials and click <strong>Sign
+                                  In:</strong></p>
+                              <ul>
+                                <li>
+                                  <p><strong>Workspace:</strong> obe</p>
+                                </li>
+                                <li>
+                                  <p><strong>Username:</strong> obe</p>
+                                </li>
+                                <li>
+                                  <p><strong>Password:</strong> oracle</p>
+                                </li>
+                              </ul>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img alt="Login page" src="./AddingChartstoApplicationExpress5.1_files/vm_only.jpg" style="border: 1px solid gray; display: block;" class="ScreenShot collapsible-outline" title="Login page"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/vm_only.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>From the Oracle Application Express home page,
+                                click the <strong>down arrow</strong> next to
+                                the App Builder tab and choose <strong>Database
+                                  Applications.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a1.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="App Builder drop down" title="App Builder drop down"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a1.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Projects Tasks Application. </strong>This
+                                is the application you imported from the Files
+                                folder in the <strong>What Do You Need?</strong>
+                                section.<strong><br>
+                                </strong></p>
+                              <p>The application ID for the Project Tasks
+                                Application used in this tutorial is 100. You
+                                may see a different application ID when you
+                                perform this tutorial.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a2.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Project Tasks Application icon" title="Project Tasks Application icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a2.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Create Page.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Page button" title="Create Page button"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Create a Page modal window, click <strong>Chart.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a4.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create a Page modal window" title="Create a Page modal window"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a4.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select <strong>Pie</strong> for Chart Type.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a5.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Chart: Chart Type" title="Create Chart: Chart Type"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a5.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Enter <strong>Tasks per Project Chart</strong>
+                                for Page Name and click <strong>Next.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a6.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Chart: Page and Region Attributes" title="Create Chart: Page and Region Attributes"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select <strong>Create a new navigation menu
+                                  entry</strong> for Navigation Preference,
+                                select <strong>Home</strong> for Parent
+                                Navigation Menu Entry, and click <strong>Next.</strong>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a7.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Chart: Navigation Menu" title="Create Chart: Navigation Menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a7.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Source Tab, select <strong>SQL Query</strong>
+                                for Source Type, enter the following in the SQL
+                                Query field, and click <strong>Next.</strong></p>
+                              <div class="view-button btn btn-primary" style="display:none;">View Code</div><div class="collapsible-wrapper"><span class="collapsible-outline" style="position:relative;display:block;"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><pre class="collapsible" data-view-label="View Code"><code>select null link,
+       p.project label,
+       t.task_count value
+from (select project_id,
+      count(*) task_count from obe_tasks group by project_id) t,
+     obe_projects p
+where t.project_id = p.project_id</code></pre></span></div>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a8.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Chart: Source" title="Create Chart: Source"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a8.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select <strong>LABEL</strong> for Label
+                                Column, <strong>VALUE</strong> for Value
+                                Column, and click <strong>Create.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a9.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Create Chart: Column Mapping" title="Create Chart: Column Mapping"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a9.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>The new chart page is created. Click <strong>Save
+                                  and Run Page.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a10.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Save and Run Page icon" title="Save and Run Page icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a10.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>You may receive a Log In screen, where you must
+                                enter your Oracle Application Express
+                                credentials, and click <strong>Log In.</strong></p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Observe the animation as the chart loads. The
+                                pie chart shows the numbers of tasks per
+                                project. Keep your mouse over the pie to display
+                                tool tip for the chart data. Also notice that
+                                the corresponding entry in the Legend getting
+                                highlighted while other entries fade out.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a11.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart" title="Tasks per Project Chart"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a11.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Edit Page &lt;n&gt;</strong> in
+                                the developer toolbar.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a12.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Developer toolbar: Edit Page 4" title="Developer toolbar: Edit Page 4"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section2">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Adding a Chart in Page Designer</span></h2>
+                        <div style="display: none;">
+                          <p>In this section, you add a Bar chart to the an
+                            existing page by using Page Designer. You add the
+                            chart to the same page where you created the Pie
+                            chart (in the previous section).</p>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>View the page in Page Designer. In this
+                                tutorial, the page 4 (Tasks per Project Chart)
+                                is opened in Page Designer.</p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Gallery at the bottom of the central
+                                pane, click <strong>Regions</strong> and locate
+                                Chart.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b2.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Gallery" title="Gallery"></span> <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b2.txt">Description of this
+                                    image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Right-click <strong>Chart</strong> in the
+                                Gallery to view a context menu. Select <strong>Add
+                                  To, Content Body, Tasks per Project Chart</strong>
+                                and choose <strong>Column After.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Chart context menu" title="Chart context menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                              <p>Page Designer indicates what actions are
+                                required next.</p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Region tab, enter <strong>Tasks per
+                                  Project Chart 2</strong> for Title and select
+                                the <strong>Attributes</strong> node in the
+                                Rendering tab.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b4a.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Region Properties of Tasks per Project Chart 2" title="Region Properties of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b4a.txt">Description
+                                    of this image</a></figcaption> </figure>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b4b.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Rendering tab of Tasks per Project Chart page" title="Rendering tab of Tasks per Project Chart page"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b4b.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Attributes tab, select <strong>Bar</strong>
+                                for Type, <strong>Horizontal</strong> for
+                                Orientation and select the <strong>New</strong>
+                                node in the Rendering tab.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b5a.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Attributes of Tasks per Project Chart 2" title="Attributes of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b5a.txt">Description
+                                    of this image</a></figcaption> </figure>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b5b.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Rendering tab of Tasks per Project Chart page" title="Rendering tab of Tasks per Project Chart page"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b5b.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Identification tab, enter <strong>Tasks</strong>
+                                for Name. In the Source tab, select <strong>SQL
+                                  Query</strong> for Type and enter the
+                                following in the SQL Query field.</p>
+                              <div class="view-button btn btn-primary" style="display:none;">View Code</div><div class="collapsible-wrapper"><span class="collapsible-outline" style="position:relative;display:block;"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><pre class="collapsible" data-view-label="View Code"><code>select null link,
+       p.project label,
+       t.task_count value
+from (select project_id,
+      count(*) task_count from obe_tasks group by project_id) t,
+     obe_projects p
+where t.project_id = p.project_id</code></pre></span></div>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b6.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Source" title="Tasks per Project Chart 2 Source"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Column Mapping tab, select <strong>LABEL</strong>
+                                and <strong>VALUE</strong> for the Label and
+                                Value field respectively.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b7.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Column Mapping" title="Tasks per Project Chart 2 Column Mapping"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b7.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Save and Run Page.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b8.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Save and Run page icon" title="Save and Run page icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b8.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>You see the new chart added to the application.<strong></strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/b9.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Save and Run page icon" title="Save and Run page icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/b9.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section3">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Editing Chart Attributes in Page Designer</span></h2>
+                        <div style="display: none;">
+                          <p>In this section, you&nbsp; edit the attributes of a
+                            Bar chart using Page Designer. </p>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>View the page containing the Bar chart in the
+                                Page Designer. In this tutorial, the page 4
+                                (Tasks per Project Chart) is opened in Page
+                                Designer.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a12.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Developer toolbar: Edit Page 4" title="Developer toolbar: Edit Page 4"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the left pane, locate <strong>Tasks per
+                                  Project Chart 2</strong> in the Rendering tab
+                                and click the<strong> Attributes </strong>node
+                                under the chart.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/c2.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Gallery" title="Gallery"></span> <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/c2.txt">Description of this
+                                    image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Appearance tab, select <strong>Vertical</strong>
+                                for orientation. In the Messages tab, enter <em style="font-weight: bold;">No data found.</em>
+                                for the When No Data Found field, and click <strong>Save
+                                  and Run Page</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/c3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Chart context menu" title="Chart context menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/c3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p> You see that the edits made to the bar chart
+                                reflects in the application.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/c4.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Chart context menu" title="Chart context menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/c4.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section4">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Switching a Chart Type in Page Designer</span></h2>
+                        <div style="display: none;">
+                          <p>In this section, you switch a Bar chart to a Line
+                            chart by editing the chart attributes in Page
+                            Designer. </p>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>View the page in Page Designer. In this
+                                tutorial, the page 4 (Tasks per Project Chart)
+                                is opened in Page Designer.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a12.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Developer toolbar: Edit Page 4" title="Developer toolbar: Edit Page 4"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the left pane, locate <strong>Tasks per
+                                  Project Chart 2</strong> in the Rendering tab
+                                and click the<strong> Attributes node</strong>
+                                under the chart. In this tutorial, chart
+                                attributes are already open in the Property
+                                Editor.</p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Expand the Chart section and select<strong>
+                                  Line</strong> for Type.<strong></strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/d3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Chart context menu" title="Chart context menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/d3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                              <p>Page Designer indicates what actions need to be
+                                performed to define required Column Mappings.</p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Rendering tab, select <strong>Tasks</strong>
+                                under the Series node.&nbsp;</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/d4.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Region Properties of Tasks per Project Chart 2" title="Region Properties of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/d4.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Property Editor, navigate to the the
+                                Column Mapping tab. Select <strong>VALUE</strong>
+                                for Value, select <strong>LINK</strong> for
+                                Custom Tooltip, and <strong>VALUE</strong> for
+                                Custom Column.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/d5.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Attributes of Tasks per Project Chart 2" title="Attributes of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/d5.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Label tab, select<strong> Yes</strong>
+                                for Show and click <strong>Save and Run Page</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/d6.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Source" title="Tasks per Project Chart 2 Source"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/d6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>You see a Line chart in place of the Bar chart
+                                in the application. Hover over a value to read
+                                the corresponding tooltip.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/d7.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Column Mapping" title="Tasks per Project Chart 2 Column Mapping"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/d7.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section5">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Creating a Dynamic Action to Refresh the Chart</span></h2>
+                        <div style="display: none;">
+                          <p>Using Dynamic Actions, you specify an action that
+                            is performed when a defined set of conditions occur.
+                            You also specify which elements are affected by the
+                            action, and when and how they are affected. In this
+                            section, you create a dynamic action to refresh the
+                            chart when it's value changes.</p>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>View the page in Page Designer. In this
+                                tutorial, the page 4 (Tasks per Project Chart)
+                                is opened in Page Designer.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a12.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Developer toolbar: Edit Page 4" title="Developer toolbar: Edit Page 4"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the left pane, Click the <strong>Dynamic
+                                  Actions </strong>tab.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e2.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Gallery" title="Gallery"></span> <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e2.txt">Description of this
+                                    image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Right-click Events and select <span style="font-weight: bold;">Create
+                                  Dynamic Action</span>.<strong></strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Chart context menu" title="Chart context menu"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                              <p>Attributes for the dynamic action are displayed
+                                in the Property Editor.</p>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Edit the following Dynamic Action attributes in
+                                the Property Editor:</p>
+                              <ul>
+                                <li>In the Identification tab, enter <strong>Refresh
+                                    </strong>as the name of the dynamic action.</li>
+                                <li>In the When tab, select <strong>Change</strong>
+                                  for Event, select <strong>Region</strong> for
+                                  Selection Type, and <strong>Tasks per Project
+                                    Chart 2</strong> for Region. </li>
+                              </ul>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e5.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Region Properties of Tasks per Project Chart 2" title="Region Properties of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e5.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Rendering tab, select <strong>Show </strong>under
+                                True. </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e6.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Attributes of Tasks per Project Chart 2" title="Attributes of Tasks per Project Chart 2"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Property Editor, change the Action to <strong>Refresh</strong>.
+                                In the Affected Elements tab, select <strong>Region</strong>
+                                for Selection Type and <strong>Tasks per
+                                  Project Chart 2</strong> for Region. In the
+                                Execution Options tab, select<strong> Yes</strong>
+                                for Fire on Initialization and click<strong>
+                                  Save</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e7.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Source" title="Tasks per Project Chart 2 Source"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e7.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p><span>In the main navigation, click the down
+                                  arrow next to the <strong>SQL Workshop</strong>
+                                  tab, right-click <span style="font-weight: bold;">SQL
+                                    Commands </span>and select<span style="font-weight: bold;">
+                                    Open link in new tab</span>.<br>
+                                </span></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e8.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Tasks per Project Chart 2 Column Mapping" title="Tasks per Project Chart 2 Column Mapping"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e8.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p> Enter the following code in the code box and
+                                click <strong>Run</strong>. </p>
+                              <div class="view-button btn btn-primary" style="display:none;">View Code</div><div class="collapsible-wrapper"><span class="collapsible-outline" style="position:relative;display:block;"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><pre class="collapsible" data-view-label="View Code"><code>Insert into OBE_TASKS VALUES 
+        ( 17
+        , 'Employee Satisfaction Survey'
+        , 'Complete analysis'
+        , TO_DATE('30-JAN-2005', 'dd-MON-yyyy')
+        , TO_DATE('03-FEB-2005', 'dd-MON-yyyy')
+	, 'open'
+        , 4
+        , 2
+	);</code></pre></span></div>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e9.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Save and Run page icon" title="Save and Run page icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e9.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Switch back to the charts window. You will see
+                                the <strong>Refresh</strong> dynamic action
+                                that we created in the previous steps has
+                                updated the number of tasks for Employee
+                                Satisfaction Survey to<strong> 4</strong> in the
+                                Tasks per Project Chart 2 chart.<strong></strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/e10.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Save and Run page icon" title="Save and Run page icon"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e10.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section6">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Using a Custom JavaScript in the Chart</span></h2>
+                        <div style="display: none;">
+                          <p>In this section, you add a JavaScript to change the
+                            appearance of an existing chart.</p>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>View the page in Page Designer. In this
+                                tutorial, the page 4 (Tasks per Project Chart)
+                                is opened in Page Designer.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/a12.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Developer toolbar: Edit Page 4" title="Developer toolbar: Edit Page 4"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/a12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Rendering tree, select the <strong>Attributes
+                                  </strong>node.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/f2.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Clicking the Attributes node in the Rendering tab" title="Clicking the Attributes node in the Rendering tab"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e2.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>To view all attributes in the Property Editor,
+                                click <strong>Show All</strong> to see all
+                                attributes for the chart.<strong></strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/f3.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Clicking Show All to see all attributes for the chart." title="Clicking Show All to see all attributes for the chart."></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e3.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the <strong>Advanced</strong> tab, enter
+                                the following code in the JavaScript code box. </p>
+                              <div class="view-button btn btn-primary" style="display:none;">View Code</div><div class="collapsible-wrapper"><span class="collapsible-outline" style="position:relative;display:block;"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><pre class="collapsible" data-view-label="View Code"><code>function( options ) {
+    console.log( "chart initialization options", options );
+
+// Setup a callback function which gets called when data is retrieved, to manipulate the series data
+    options.dataFilter = function( data ) {
+        data.series[ 0 ].color = "#ED6647";
+        data.series[ 0 ].borderColor = "#0F3248";
+        data.series[ 0 ].markerDisplayed = "on";
+        data.series[ 0 ].markerShape = "plus";
+        data.series[ 0 ].markerColor = "red";
+        data.series[ 0 ].markerSize = 8;
+        data.series[ 0 ].pattern = "smallChecker";
+        return data;
+    };
+    return options;
+}
+</code></pre></span></div>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/f4.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Entering the JavaScript code" title="Entering the JavaScript code"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e5.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Save and Run Page</strong>. </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/f5.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="Clicking Save and Run Pgae." title="Clicking Save and Run Pgae."></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>You see the JavaScript code has customized the
+                                appearance of the chart while rendering.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./AddingChartstoApplicationExpress5.1_files/f6.jpg" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;" alt="The updated appearance of the chart" title="The updated appearance of the chart"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/files/e6.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="summary">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Want to Learn More?</span></h2>
+                        <div style="display: none;">
+                          <ul>
+                            <li><a href="http://www.oracle.com/pls/topic/lookup?ctx=E71588-01&amp;id=HTMDB-GUID-50985225-4C89-489B-B019-E2D91E61428A" target="_blank">Creating
+                                Charts</a></li>
+                          </ul>
+                        </div>
+                      </section>
+                      <!-- END Article --> </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- footer of the page -->
+      <footer id="footer">
+        <div class="f1">
+          <div class="holder">
+            <div class="container-fluid">
+              <div class="pull-left footer-left">
+                <ul class="footer-nav list-inline">
+                  <li class="separator" style="height: 17px;"><a href="http://www.oracle.com/corporate/index.html">About
+                      Oracle</a></li>
+                  <li style="height: 17px;"><a href="http://www.oracle.com/us/corporate/contact/index.html">Contact
+                      Us</a></li>
+                  <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/index.html">Legal
+                      Notices</a></li>
+                  <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/terms/index.html">Terms
+                      of Use</a></li>
+                  <li class="same-height-right" style="height: 17px;"><a href="http://www.oracle.com/us/legal/privacy/index.html">Your
+                      Privacy Rights</a></li>
+                </ul>
+                <span class="copyright">Copyright © 2016, Oracle and/or its
+                  affiliates. All rights reserved.</span> </div>
+              <!-- insert lan options --> </div>
+          </div>
+        </div>
+      </footer>
+      <!-- allow a user to go to the top of the page --> <a class="accessibility" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html#wrapper">Back to top</a> </div>
+    <!-- begin codemirror here -->
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/runmode-standalone.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/clike.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/sql.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/xml.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/javascript.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/css.js.download"></script>
+    <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/htmlmixed.js.download"></script>
+    <script type="text/javascript">
+	var config;
+	
+	config = {
+		lineNumbers: true,
+		mode : "xml",
+	htmlMode: true,
+		indentWithTabs: false,
+		readOnly: true
+	};
+
+</script> <!-- end codemirror here -->
+    <script language="javascript">
+  var s_prefix="OBE";
+  if (typeof(document.title)!= "undefined") {var s_pageName=s_prefix + ":" + document.title};
+</script> <script type="text/javascript" src="./AddingChartstoApplicationExpress5.1_files/ora_docs.js.download"></script><script src="./AddingChartstoApplicationExpress5.1_files/ora_code_docs.js.download"></script><script src="./AddingChartstoApplicationExpress5.1_files/ora_code.js.download"></script>
+<script type="text/javascript">
+  window.onload = function () {
+    $('section > h2').each(function() {
+        $(this).next('div').show();
+        $(this).button({
+            icons: {primary: "ui-icon-circle-minus"}
+        });
+    });
+    $('section > h3').each(function() {
+        $(this).next('div').show();
+        $(this).addClass("d_arrow");
+    });
+    $('section > h2 > span.ui-icon').css({"display": "none"});
+    $('section > h2 > span > span.ui-button-text').css({"text-align" : "center"});
+  };
+</script>
+  
+
+</body></html>

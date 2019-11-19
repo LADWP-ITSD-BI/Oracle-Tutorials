@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<!-- saved from url=(0092)https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html -->
+<html lang="en">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <!-- Last updated: 10/18/16 -->
+
+  <!-- set the encoding of your site -->
+
+  <!-- set the viewport width and initial-scale on mobile devices -->
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Creating an Application Express Database Application from a Spreadsheet</title>
+  <!-- Add short description of the OBE for displaying in  search results, etc.-->
+  <meta name="description"
+    content="In this tutorial, you learn how to create a Database Application in Application Express from a spreadsheet.">
+  <link href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/css" rel="stylesheet"
+    type="text/css">
+  <!-- include the site stylesheet -->
+  <link rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery-ui.min.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/bootstrap.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/glyphicons.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/all.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/fusiondoc-obe.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/obe.css">
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/print.css">
+
+  <!-- Code Mirror stylesheet -->
+  <link type="text/css" rel="stylesheet"
+    href="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/codemirror.css">
+
+  <!-- include jQuery library -->
+  <iframe src="javascript:void(0)" title="" style="width: 0px; height: 0px; border: 0px; display: none;"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/saved_resource.html"></iframe>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery.min.js.download"></script>
+  <script
+    type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script>
+  <script
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery-1.11.1.min.js.download"></script>
+  <script src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/bootstrap.js.download"></script>
+
+  <!-- include custom JavaScript -->
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/ZeroClipboard.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery.main.js.download"></script>
+  <style type="text/css">
+    .js-tab-hidden {
+      position: absolute !important;
+      left: -9999px !important;
+      top: -9999px !important;
+      /*display:block !important*/
+    }
+  </style>
+
+  <!-- Load jQuery, SimpleModal and Basic JS files -->
+  <!--[if lt IE 9]>
+          <script type="text/javascript" src="js/modernizr.custom.80798.js"></script>        <![endif]-->
+  <!--  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery.XDomainRequest.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery.cookie.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery-queryParser.min.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery-ui.min.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery.visible.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/hooks.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/purl.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/basic.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/obe-scrollfixed.js.download"></script>
+  <!--script type="text/javascript" src="js/REST.UI.js"></script-->
+
+  <!--end obe scripts -->
+  <script type="text/javascript">
+    if (navigator.userAgent.match(/IEMobile\/10\.0/) || navigator.userAgent.match(/MSIE 10.*Touch/)) {
+      var msViewportStyle = document.createElement('style')
+      msViewportStyle.appendChild(
+        document.createTextNode(
+          '@-ms-viewport{width:auto !important}'
+        )
+      )
+      document.querySelector('head').appendChild(msViewportStyle)
+    }
+  </script>
+  <script
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/jquery-ui-1.10.4.custom.js.download"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      window.location.origin.indexOf('https://') >= 0 || window.location.origin.indexOf('http://') >= 0 ? $('.vm-only').hide() : $('.oll-only').hide();
+    });
+  </script>
+  <script>!function () { function o(n, i) { if (n && i) for (var r in i) i.hasOwnProperty(r) && (void 0 === n[r] ? n[r] = i[r] : n[r].constructor === Object && i[r].constructor === Object ? o(n[r], i[r]) : n[r] = i[r]) } try { var n = decodeURIComponent(""); if (n.length > 0 && window.JSON && "function" == typeof window.JSON.parse) { var i = JSON.parse(n); void 0 !== window.BOOMR_config ? o(window.BOOMR_config, i) : window.BOOMR_config = i } } catch (r) { window.console && "function" == typeof window.console.error && console.error("mPulse: Could not parse configuration", r) } }();</script>
+  <script>!function (e) { var a = "https://s.go-mpulse.net/boomerang/", t = "addEventListener"; if ("False" == "True") e.BOOMR_config = e.BOOMR_config || {}, e.BOOMR_config.PageParams = e.BOOMR_config.PageParams || {}, e.BOOMR_config.PageParams.pci = !0, a = "https://s2.go-mpulse.net/boomerang/"; if (window.BOOMR_API_key = "DXNLE-YBWWY-AR74T-WMD99-77VRA", function () { function n(a) { e.BOOMR_onload = a && a.timeStamp || (new Date).getTime() } if (!e.BOOMR || !e.BOOMR.version && !e.BOOMR.snippetExecuted) { e.BOOMR = e.BOOMR || {}, e.BOOMR.snippetExecuted = !0; var i, o, r, _ = document.createElement("iframe"); if (e[t]) e[t]("load", n, !1); else if (e.attachEvent) e.attachEvent("onload", n); _.src = "javascript:void(0)", _.title = "", _.role = "presentation", (_.frameElement || _).style.cssText = "width:0;height:0;border:0;display:none;", r = document.getElementsByTagName("script")[0], r.parentNode.insertBefore(_, r); try { o = _.contentWindow.document } catch (O) { i = document.domain, _.src = "javascript:var d=document.open();d.domain='" + i + "';void(0);", o = _.contentWindow.document } o.open()._l = function () { var e = this.createElement("script"); if (i) this.domain = i; e.id = "boomr-if-as", e.src = a + "DXNLE-YBWWY-AR74T-WMD99-77VRA", BOOMR_lstart = (new Date).getTime(), this.body.appendChild(e) }, o.write("<bo" + 'dy onload="document._l();">'), o.close() } }(), "".length > 0) if (e && "performance" in e && e.performance && "function" == typeof e.performance.setResourceTimingBufferSize) e.performance.setResourceTimingBufferSize(); !function () { if (BOOMR = e.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) { var a = "" == "true" ? 1 : 0, t = "", n = "q3ewayaxb5mkoxoo6vfa-f-1ae35b250-clientnsv4-s.akamaihd.net", i = { "ak.v": 25, "ak.cp": "82485", "ak.ai": parseInt("165266", 10), "ak.ol": "0", "ak.cr": 11, "ak.ipv": 4, "ak.proto": "h2", "ak.rid": "20a1948", "ak.r": 32291, "ak.a2": a, "ak.m": "dscx", "ak.n": "essl", "ak.bpcip": "134.201.96.0", "ak.cport": 55155, "ak.gh": "23.55.36.183", "ak.quicv": "", "ak.tlsv": "tls1.2", "ak.0rtt": "", "ak.csrc": "-", "ak.acc": "", "ak.t": "1573844298" }; if ("" !== t) i["ak.ruds"] = t; var o = { i: !1, av: function (a) { var t = "http.initiator"; if (a && (!a[t] || "spa_hard" === a[t])) i["ak.feo"] = void 0 !== e.aFeoApplied ? 1 : 0, BOOMR.addVar(i) }, rv: function () { var e = ["ak.bpcip", "ak.cport", "ak.cr", "ak.csrc", "ak.gh", "ak.ipv", "ak.m", "ak.n", "ak.ol", "ak.proto", "ak.quicv", "ak.tlsv", "ak.0rtt", "ak.r", "ak.acc", "ak.t"]; BOOMR.removeVar(e) } }; BOOMR.plugins.AK = { akVars: i, akDNSPreFetchDomain: n, init: function () { if (!o.i) { var e = BOOMR.subscribe; e("before_beacon", o.av, null, null), e("onbeacon", o.rv, null, null), o.i = !0 } return this }, is_complete: function () { return !0 } } } }() }(window);</script>
+</head>
+
+<body>
+  <noscript>
+    <div>JavaScript must be enabled for the correct page display</div>
+  </noscript>
+  <!-- main container of all the page elements -->
+  <div id="wrapper">
+    <!-- allow a user to go to the main content of the page -->
+    <a class="accessibility skipto"
+      href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#content">Skip
+      to Content</a>
+    <!-- header of the page -->
+    <header id="header">
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="holder">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <!-- page logo -->
+              <div class="logo pull-left" itemscope="" itemtype="http://schema.org/Organization"> <span
+                  class="name-organization" itemprop="name">Oracle</span> <a
+                  href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#">
+                  <span data-picture="" data-alt="Oracle Logo"> <span
+                      data-src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/logo.png"
+                      data-width="221" data-height="20" data-alt="Oracle Logo"></span> <span
+                      data-src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/logo-2x.png"
+                      data-width="221" data-height="20"
+                      data-media="(-webkit-min-device-pixel-ratio:1.5), (min-resolution:144dpi)"><img alt="Oracle Logo"
+                        width="221" height="20"
+                        src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/logo-2x.png"
+                        title="Oracle Logo"></span>
+                    <!--[if (lt IE 9) & (!IEMobile)]>
+                      <span data-src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/logo.png"></span>
+                  <![endif]-->
+                    <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                    <noscript>
+                      <img src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/logo.png"
+                        alt="Oracle Logo" width="221" height="20">
+                    </noscript>
+                  </span> </a> </div>
+            </div>
+            <div class="navbar-right"> </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- contain main informative part of the site -->
+    <main role="main" id="main">
+      <div class="holder">
+        <div class="container-fluid">
+          <h1>Creating an Application Express Database Application from a Spreadsheet</h1>
+          <!-- contain the main content of the page -->
+          <div class="content-holder">
+            <div class="content" style="min-height: 584px;">
+              <!-- tabs content holder -->
+              <div class="slide-holder left-tab-holder js-tab-hidden">
+
+                <!-- tab element -->
+                <div id="tab1" class="js-tab-hidden" style="display: none;">
+                  <div class="slide-frame">
+                    <div id="left-nav-container">
+                      <div class="left-nav-element">
+                        <div id="navToc" title="Topic List">
+                          <ul>
+                            <li><a title="Before You Begin"
+                                href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#overview">Before
+                                You Begin</a></li>
+                            <li><a title="Creating an Application from Spreadsheet Data"
+                                href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#section1">Creating
+                                an Application from Spreadsheet Data</a></li>
+                            <li><a title="Executing and Reviewing the Application"
+                                href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#section2">Executing
+                                and Reviewing the Application</a></li>
+                            <li><a title="Want to Learn More?"
+                                href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#summary">Want
+                                to Learn More?</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <br style="clear:both">
+                  </div>
+                </div>
+
+                <!-- tab element -->
+                <div id="tab2" class="js-tab-hidden" style="display: none;">
+                  <div class="slide-frame">
+                    <div class="left-nav-element">
+                      <div id="toolbar">
+                        <h3>Options</h3>
+                        <button id="tglTopicBtn"
+                          class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                          role="button" aria-disabled="false"><span class="ui-button-text">Expand All
+                            Topics</span></button>
+                        <br>
+                        <br>
+                        <button id="tglImageBtn"
+                          class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+                          role="button" aria-disabled="false"><span class="ui-button-text">Hide All
+                            Media</span></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- tabs content holder -->
+              <div class="slide-holder right right-tab-holder js-tab-hidden"> </div>
+              <div class="left-panel pull-left">
+                <!-- tabs switcher -->
+                <ul class="tabset-panel list-unstyled text-center" style="top: 0px;">
+                  <li> <a
+                      href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#tab1"
+                      class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span
+                        class="glyphicons glyphicons-list"></span>
+                      <div class="tooltip right" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Table of Contents</div>
+                      </div>
+                    </a> </li>
+                  <!-- -->
+                  <li> <a
+                      href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#tab2"
+                      class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span
+                        class="glyphicons glyphicons-cogwheels"></span>
+                      <div class="tooltip right" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Options</div>
+                      </div>
+                    </a> </li>
+                  <li> <a
+                      href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#tab3"
+                      class="opener tooltip-link print" data-toggle="tooltip" data-placement="right"> <span
+                        class="glyphicons glyphicons-print"></span>
+                      <div class="tooltip right" role="tooltip">
+                        <div class="tooltip-arrow"></div>
+                        <div class="tooltip-inner">Print</div>
+                      </div>
+                    </a> </li>
+                </ul>
+              </div>
+              <div class="content-right" id="content">
+                <article>
+                  <div id="container" class="" style="top: 54px; min-height: 0px;">
+                    <!-- START Article -->
+                    <section>
+                      <a id="overview">&nbsp;</a>
+                      <h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+                        role="button" aria-disabled="false" style="text-align: left;"><span
+                          class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span
+                          class="ui-button-text">Before You Begin</span></h2>
+                      <div style="display: none;">
+                        <h4>Purpose</h4>
+                        <p>In this tutorial, you learn how to create a Database Application in Application Express from
+                          a spreadsheet.</p>
+                        <h4>Time to Complete</h4>
+                        <p>Approximately 15 minutes</p>
+                        <h4>Background</h4>
+                        <p>Oracle Application Express provides a functionality to create a desktop application based on
+                          a spreadsheet data. This can be done by selecting <strong>From a spreadsheet</strong> in the
+                          Create Application Wizard.</p>
+                        <h4>What Do You Need?</h4>
+                        <ul>
+                          <li>
+                            <p>Oracle Application Express workspace</p>
+                          </li>
+                          <li>
+                            <p>Spreadsheet to create the database application - The <a
+                                href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/tasks.txt">tasks.txt</a>
+                              spreadsheet is used in this tutorial.</p>
+                          </li>
+                        </ul>
+                      </div>
+                    </section>
+                    <section>
+                      <a id="section1">&nbsp;</a>
+                      <h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+                        role="button" aria-disabled="false" style="text-align: left;"><span
+                          class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span
+                          class="ui-button-text">Creating an Application from Spreadsheet Data</span></h2>
+                      <div style="display: none;">
+                        <ol>
+                          <li class="vm-only" style="font-weight: bold; display: none;"><span>
+                              <p>In the Application Express login page, enter the following login credentials and click
+                                <strong>Sign In:</strong></p>
+                              <ul>
+                                <li>
+                                  <p><strong>Workspace:</strong> obe</p>
+                                </li>
+                                <li>
+                                  <p><strong>Username:</strong> obe</p>
+                                </li>
+                                <li>
+                                  <p><strong>Password:</strong> oracle</p>
+                                </li>
+                              </ul>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img alt="Login page"
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/vm_only.jpg"
+                                    class="ScreenShot collapsible-outline" title="Login page"
+                                    style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/vm_only.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>On the Workspace home page, click the <strong>App Builder</strong> icon.</p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a1.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="App Builder icon in Application Express 5.1"
+                                    title="App Builder icon in Application Express 5.1" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a1.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>Click the <strong>Create</strong> button.</p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a2.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Create button in Application Express 5.1"
+                                    title="Create button in Application Express 5.1" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a2.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>In the Create an Application modal window, select <strong>From a spreadsheet.</strong>
+                              </p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a3.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Create an Application modal window"
+                                    title="Create an Application modal window" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a3.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>For Load Method, select <strong>Upload file, comma separated (*.csv) or tab
+                                  delimited</strong> and click <strong>Next.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a4.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Create an Application From Spreadsheet: Load Method"
+                                    title="Create an Application From Spreadsheet: Load Method"
+                                    style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a4.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>For Data, click <strong>Choose File,</strong> navigate to the spreadsheet (or CSV)
+                                file, and click <strong>Open.</strong> Enter <strong>\t</strong> for Separator, ensure
+                                that "First row contains column names." checkbox is enabled, and click
+                                <strong>Next.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a5.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Create an Application From Spreadsheet: Data"
+                                    title="Create an Application From Spreadsheet: Data" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a5.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>For Table Properties, select <strong>HR</strong> for Schema and enter
+                                <strong>TASKS</strong> for Table Name. Review the table properties and click
+                                <strong>Next.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a6.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Create an Application From Spreadsheet: Table Properties"
+                                    title="Create an Application From Spreadsheet: Table Properties"
+                                    style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a6.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>For Application Options, accept the default for Application Name and Report Type and
+                                click <strong>Create Application.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/a7.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Create an Application From Spreadsheet: Application Options"
+                                    title="Create an Application From Spreadsheet: Application Options"
+                                    style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/a7.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>The application is created successfully.</p>
+                            </span></li>
+                        </ol>
+                      </div>
+                    </section>
+                    <section>
+                      <a id="section2">&nbsp;</a>
+                      <h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+                        role="button" aria-disabled="false" style="text-align: left;"><span
+                          class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span
+                          class="ui-button-text">Executing and Reviewing the Application</span></h2>
+                      <div style="display: none;">
+                        <ol>
+                          <li style="font-weight: bold;"><span>
+                              <p>On the Application home page, click the <strong>Run Application</strong> icon.</p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b1.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Run Application icon"
+                                    title="Run Application icon" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b1.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>Enter your login credentials and click <strong>Log In.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b2.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Tasks Application: Log In page"
+                                    title="Tasks Application: Log In page" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b2.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>The home page of the TASKS application, containing the interactive report, is
+                                displayed. Click the <strong>Edit</strong> icon in the first row.</p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b3.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Tasks Application home page"
+                                    title="Tasks Application home page" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b3.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>The modal window to edit the Tasks entry appears. Change the value for Cost and click
+                                <strong>Apply Changes.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b4.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Edit Tasks modal window"
+                                    title="Edit Tasks modal window" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b4.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>The Cost has been updated. Now you create a new Task. Click <strong>Create.</strong>
+                              </p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b5.jpg"
+                                    class="ScreenShot collapsible-outline"
+                                    alt="Tasks Application home page: Create Task"
+                                    title="Tasks Application home page: Create Task" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b5.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>Enter details for the new task and click <strong>Create.</strong></p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b6.jpg"
+                                    class="ScreenShot collapsible-outline" alt="Create Task modal window"
+                                    title="Create Task modal window" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b6.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                          <li style="font-weight: bold;"><span>
+                              <p>The new task is successfully created. You will be able to see the new task in the
+                                Interactive Report.</p>
+                              <figure>
+                                <div class="view-button btn btn-primary" style="display:none;">View Image</div><span
+                                  class="collapsible-wrapper" style="position:relative"><span
+                                    class="collapsible-icon ui-icon ui-icon-closethick"></span><img
+                                    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/b7.jpg"
+                                    class="ScreenShot collapsible-outline" alt="The new task in the Interactive Report"
+                                    title="The new task in the Interactive Report" style="display: block;"></span>
+                                <figcaption><a
+                                    href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/files/b7.txt">Description
+                                    of this image</a></figcaption>
+                              </figure>
+                            </span></li>
+                        </ol>
+
+                      </div>
+                    </section>
+                    <section>
+                      <a id="summary">&nbsp;</a>
+                      <h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary"
+                        role="button" aria-disabled="false" style="text-align: left;"><span
+                          class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span
+                          class="ui-button-text">Want to Learn More?</span></h2>
+                      <div style="display: none;">
+                        <ul>
+                          <li>
+                            <p><a
+                                href="http://www.oracle.com/technetwork/developer-tools/apex/documentation/doc-093691.html"
+                                target="_blank">Oracle Application Express Documentation</a></p>
+                          </li>
+                          <li>
+                            <p><a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html"
+                                target="_blank">Oracle Application Express on Oracle Technology Network</a></p>
+                          </li>
+                          <li>
+                            <p><a href="http://www.oracle.com/oll" target="_blank">Oracle Learning Library</a></p>
+                          </li>
+                        </ul>
+                      </div>
+                    </section>
+                    <!-- END Article -->
+                  </div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- footer of the page -->
+    <footer id="footer">
+      <div class="f1">
+        <div class="holder">
+          <div class="container-fluid">
+            <div class="pull-left footer-left">
+              <ul class="footer-nav list-inline">
+                <li class="separator" style="height: 17px;"><a href="http://www.oracle.com/corporate/index.html">About
+                    Oracle</a></li>
+                <li style="height: 17px;"><a href="http://www.oracle.com/us/corporate/contact/index.html">Contact Us</a>
+                </li>
+                <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/index.html">Legal Notices</a></li>
+                <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/terms/index.html">Terms of Use</a>
+                </li>
+                <li class="same-height-right" style="height: 17px;"><a
+                    href="http://www.oracle.com/us/legal/privacy/index.html">Your Privacy Rights</a></li>
+              </ul>
+              <span class="copyright">Copyright © 2016, Oracle and/or its affiliates. All rights reserved.</span>
+            </div>
+            <!-- insert lan options -->
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- allow a user to go to the top of the page -->
+    <a class="accessibility"
+      href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html#wrapper">Back
+      to top</a>
+  </div>
+
+  <!-- begin codemirror here -->
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/runmode-standalone.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/clike.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/sql.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/xml.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/javascript.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/css.js.download"></script>
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/htmlmixed.js.download"></script>
+  <script type="text/javascript">
+    var config;
+
+    config = {
+      lineNumbers: true,
+      mode: "xml",
+      htmlMode: true,
+      indentWithTabs: false,
+      readOnly: true
+    };
+
+  </script>
+
+  <!-- end codemirror here -->
+
+  <script language="javascript">
+    var s_prefix = "OBE";
+    if (typeof (document.title) != "undefined") { var s_pageName = s_prefix + ":" + document.title };
+  </script>
+
+  <script type="text/javascript"
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/ora_docs.js.download"></script>
+  <script
+    src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/ora_code_docs.js.download"></script>
+  <script src="./CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet_files/ora_code.js.download"></script>
+  <script type="text/javascript">
+    window.onload = function () {
+      $('section > h2').each(function () {
+        $(this).next('div').show();
+        $(this).button({
+          icons: { primary: "ui-icon-circle-minus" }
+        });
+      });
+      $('section > h3').each(function () {
+        $(this).next('div').show();
+        $(this).addClass("d_arrow");
+      });
+      $('section > h2 > span.ui-icon').css({ "display": "none" });
+      $('section > h2 > span > span.ui-button-text').css({ "text-align": "center" });
+    };
+  </script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<!-- saved from url=(0101)https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <!-- Last updated: 07/10/15 -->
+    <!-- set the encoding of your site -->
+    <!-- set the viewport width and initial-scale on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Creating PDF Reports with Oracle Application Express 5.0 and Oracle
+      REST Data Services</title>
+    <!-- Add short description of the OBE for displaying in  search results, etc.-->
+    <meta name="description" content="Add short description here.">
+    <link href="./RunningPDFReportswithApplicationExpress5.1_files/css" rel="stylesheet" type="text/css">
+    <!-- include the site stylesheet -->
+    <link rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/glyphicons.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/all.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/fusiondoc-obe.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/obe.css">
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/print.css">
+    <!-- Code Mirror stylesheet -->
+    <link type="text/css" rel="stylesheet" href="./RunningPDFReportswithApplicationExpress5.1_files/codemirror.css">
+    <!-- include jQuery library -->
+    <iframe src="javascript:void(0)" title="" style="width: 0px; height: 0px; border: 0px; display: none;" src="./RunningPDFReportswithApplicationExpress5.1_files/saved_resource.html"></iframe><script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery.min.js.download"></script>
+    <script type="text/javascript">window.jQuery || document.write('<script src="js/jquery-1.11.1.min.js"><\/script>')</script><script src="./RunningPDFReportswithApplicationExpress5.1_files/jquery-1.11.1.min.js.download"></script>
+    <script src="./RunningPDFReportswithApplicationExpress5.1_files/bootstrap.js.download"></script>
+    <!-- include custom JavaScript -->
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/ZeroClipboard.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery.main.js.download"></script><style type="text/css">.js-tab-hidden{position:absolute !important;left:-9999px !important;top:-9999px !important;/*display:block !important*/}</style>
+    <!-- Load jQuery, SimpleModal and Basic JS files -->
+    <!--[if lt IE 9]>
+            <script type="text/javascript" src="js/modernizr.custom.80798.js"></script>        <![endif]-->
+    <!--  <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>-->
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery.XDomainRequest.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery.cookie.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery-queryParser.min.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery-ui.min.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/jquery.visible.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/hooks.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/purl.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/basic.js.download"></script>
+    <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/obe-scrollfixed.js.download"></script>
+    <!--script type="text/javascript" src="js/REST.UI.js"></script-->
+    <!--end obe scripts -->
+    <script type="text/javascript">
+		if (navigator.userAgent.match(/IEMobile\/10\.0/) || navigator.userAgent.match(/MSIE 10.*Touch/)) {
+			var msViewportStyle = document.createElement('style')
+			msViewportStyle.appendChild(
+				document.createTextNode(
+					'@-ms-viewport{width:auto !important}'
+				)
+			)
+			document.querySelector('head').appendChild(msViewportStyle)
+		}
+</script> <script src="./RunningPDFReportswithApplicationExpress5.1_files/jquery-ui-1.10.4.custom.js.download"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+        window.location.origin.indexOf('https://') >= 0 || window.location.origin.indexOf('http://') >= 0 ? $('.vm-only').hide() : $('.oll-only').hide();
+    });
+</script> 
+  <script>!function(){function o(n,i){if(n&&i)for(var r in i)i.hasOwnProperty(r)&&(void 0===n[r]?n[r]=i[r]:n[r].constructor===Object&&i[r].constructor===Object?o(n[r],i[r]):n[r]=i[r])}try{var n=decodeURIComponent("");if(n.length>0&&window.JSON&&"function"==typeof window.JSON.parse){var i=JSON.parse(n);void 0!==window.BOOMR_config?o(window.BOOMR_config,i):window.BOOMR_config=i}}catch(r){window.console&&"function"==typeof window.console.error&&console.error("mPulse: Could not parse configuration",r)}}();</script>
+  <script>!function(e){var a="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")e.BOOMR_config=e.BOOMR_config||{},e.BOOMR_config.PageParams=e.BOOMR_config.PageParams||{},e.BOOMR_config.PageParams.pci=!0,a="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="DXNLE-YBWWY-AR74T-WMD99-77VRA",function(){function n(a){e.BOOMR_onload=a&&a.timeStamp||(new Date).getTime()}if(!e.BOOMR||!e.BOOMR.version&&!e.BOOMR.snippetExecuted){e.BOOMR=e.BOOMR||{},e.BOOMR.snippetExecuted=!0;var i,o,r,_=document.createElement("iframe");if(e[t])e[t]("load",n,!1);else if(e.attachEvent)e.attachEvent("onload",n);_.src="javascript:void(0)",_.title="",_.role="presentation",(_.frameElement||_).style.cssText="width:0;height:0;border:0;display:none;",r=document.getElementsByTagName("script")[0],r.parentNode.insertBefore(_,r);try{o=_.contentWindow.document}catch(O){i=document.domain,_.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",o=_.contentWindow.document}o.open()._l=function(){var e=this.createElement("script");if(i)this.domain=i;e.id="boomr-if-as",e.src=a+"DXNLE-YBWWY-AR74T-WMD99-77VRA",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(e)},o.write("<bo"+'dy onload="document._l();">'),o.close()}}(),"".length>0)if(e&&"performance"in e&&e.performance&&"function"==typeof e.performance.setResourceTimingBufferSize)e.performance.setResourceTimingBufferSize();!function(){if(BOOMR=e.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var a=""=="true"?1:0,t="",n="q3ewayaxb5mkoxoo6ucq-f-d2f2436f4-clientnsv4-s.akamaihd.net",i={"ak.v":25,"ak.cp":"82485","ak.ai":parseInt("165266",10),"ak.ol":"0","ak.cr":16,"ak.ipv":4,"ak.proto":"h2","ak.rid":"207ee1c","ak.r":32291,"ak.a2":a,"ak.m":"dscx","ak.n":"essl","ak.bpcip":"134.201.96.0","ak.cport":17174,"ak.gh":"23.55.36.183","ak.quicv":"","ak.tlsv":"tls1.2","ak.0rtt":"","ak.csrc":"-","ak.acc":"","ak.t":"1573844229"};if(""!==t)i["ak.ruds"]=t;var o={i:!1,av:function(a){var t="http.initiator";if(a&&(!a[t]||"spa_hard"===a[t]))i["ak.feo"]=void 0!==e.aFeoApplied?1:0,BOOMR.addVar(i)},rv:function(){var e=["ak.bpcip","ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.r","ak.acc","ak.t"];BOOMR.removeVar(e)}};BOOMR.plugins.AK={akVars:i,akDNSPreFetchDomain:n,init:function(){if(!o.i){var e=BOOMR.subscribe;e("before_beacon",o.av,null,null),e("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+  <body> <noscript>
+<div>Javascript must be enabled for the correct page display</div>
+</noscript><!-- main container of all the page elements -->
+    <div id="wrapper">
+      <!-- allow a user to go to the main content of the page --> <a class="accessibility skipto" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#content">Skip to Content</a>
+      <!-- header of the page -->
+      <header id="header">
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="holder">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <!-- page logo -->
+                <div class="logo pull-left" itemscope="" itemtype="http://schema.org/Organization">
+                  <span class="name-organization" itemprop="name">Oracle</span>
+                  <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#"> <span data-picture="" data-alt="Oracle Logo"> <span data-src="./RunningPDFReportswithApplicationExpress5.1_files/logo.png" data-width="221" data-height="20" data-alt="Oracle Logo"></span> <span data-src="./RunningPDFReportswithApplicationExpress5.1_files/logo-2x.png" data-width="221" data-height="20" data-media="(-webkit-min-device-pixel-ratio:1.5), (min-resolution:144dpi)"><img alt="Oracle Logo" width="221" height="20" src="./RunningPDFReportswithApplicationExpress5.1_files/logo-2x.png"></span>
+                      <!--[if (lt IE 9) & (!IEMobile)]>
+									<span data-src="./RunningPDFReportswithApplicationExpress5.1_files/logo.png"></span>								<![endif]-->
+                      <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+                      <noscript>
+              <img src="./RunningPDFReportswithApplicationExpress5.1_files/logo.png" alt="Oracle Logo" height="20" width="221">
+              </noscript> </span> </a> </div>
+              </div>
+              <div class="navbar-right"> </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <!-- contain main informative part of the site -->
+      <main role="main" id="main">
+        <div class="holder">
+          <div class="container-fluid">
+            <h1>Creating PDF Reports with Oracle Application Express 5.1 and
+              Oracle REST Data Services</h1>
+            <!-- contain the main content of the page -->
+            <div class="content-holder">
+              <div class="content" style="min-height: 550px;">
+                <!-- tabs content holder -->
+                <div class="slide-holder left-tab-holder js-tab-hidden">
+                  <!-- tab element -->
+                  <div id="tab1" class="js-tab-hidden" style="display: none;">
+                    <div class="slide-frame">
+                      <div id="left-nav-container">
+                        <div class="left-nav-element">
+                          <div id="navToc" title="Topic List">
+                            <ul>
+                            <li><a title="Before You Begin" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#overview">Before You Begin</a></li><li><a title="Setting up the Print Server From Oracle Application
+                          Express Instance Administration" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#section1">Setting up the Print Server From Oracle Application
+                          Express Instance Administration</a></li><li><a title="Creating a Database Application with a Classic
+                          Report" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#section2">Creating a Database Application with a Classic
+                          Report</a></li><li><a title="Enabling PDF Printing for the Classic Report" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#section3">Enabling PDF Printing for the Classic Report</a></li><li><a title="Want to Learn More?" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#summary">Want to Learn More?</a></li></ul>
+                          </div>
+                        </div>
+                      </div>
+                      <br style="clear:both">
+                    </div>
+                  </div>
+                  <!-- tab element -->
+                  <div id="tab2" class="js-tab-hidden" style="display: none;">
+                    <div class="slide-frame">
+                      <div class="left-nav-element">
+                        <div id="toolbar">
+                          <h3>Options</h3>
+                          <button id="tglTopicBtn" class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Expand
+                            All Topics</span></button> <br>
+                          <br>
+                          <button id="tglImageBtn" class="btn btn-primary ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" aria-disabled="false"><span class="ui-button-text">Hide All Media</span></button> </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- tabs content holder -->
+                <div class="slide-holder right right-tab-holder js-tab-hidden"> </div>
+                <div class="left-panel pull-left">
+                  <!-- tabs switcher -->
+                  <ul class="tabset-panel list-unstyled text-center" style="top: 0px;">
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#tab1" class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-list"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Table of Contents</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                    <!-- -->
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#tab2" class="opener tooltip-link" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-cogwheels"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Options</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                    <li> <a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#tab3" class="opener tooltip-link print" data-toggle="tooltip" data-placement="right"> <span class="glyphicons glyphicons-print"></span>
+                        <div class="tooltip right" role="tooltip">
+                          <div class="tooltip-inner">Print</div>
+                        </div>
+                      </a> <br>
+                    </li>
+                  </ul>
+                </div>
+                <div class="content-right" id="content">
+                  <article>
+                    <div id="container" class="" style="top: 54px; min-height: 0px;">
+                      <!-- START Article -->
+                      <section>
+                        <a id="overview">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Before You Begin</span></h2>
+                        <div style="display: none;">
+                          <h4>Purpose</h4>
+                          <p>This tutorial shows how to create PDF reports using
+                            the Oracle REST Data Services and Oracle Application
+                            Express 5.1.</p>
+                          <h4>Time to Complete</h4>
+                          <p> Approximately 20 minutes. </p>
+                          <h4>Overview</h4>
+                          <p>Oracle Application Express (Oracle APEX) is a rapid
+                            web application development tool for the Oracle
+                            database. Using only a web browser and limited
+                            programming experience, you can develop and deploy
+                            professional applications that are both fast and
+                            secure. Oracle Application Express is available with
+                            the Oracle Database, whether it's on-premises or in
+                            an Oracle Database Cloud Service.</p>
+                          You can configure a classic report region to print by
+                          exporting it to several different formats such as
+                          Adobe Portable Document Format (PDF), Microsoft Word
+                          Rich Text Format (RTF), or Microsoft Excel Format
+                          (XLS), or Extensible Markup Language (XML). Oracle
+                          Application Express provides three report printing
+                          configuration options. They are:<br>
+                          <ul>
+                            <li><strong>Oracle REST Data Services</strong>: This
+                              option can be selected if you are using Oracle
+                              REST Data Services 2.0 or newer. This option
+                              enables you to use the basic printing
+                              functionality, which includes creating report
+                              queries and printing report regions using the
+                              default templates provided in Application Express
+                              and using your own customized XSL-FO templates.</li>
+                            <li><span style="font-weight: bold;">External
+                                (Apache FOP)</span>: This option can be selected
+                              if you are using Apache FOP on an external J2EE
+                              server. This option also enables you to use the
+                              basic printing functionality, which includes
+                              creating report queries and printing report
+                              regions using the default templates provided in
+                              Application Express and using your own customized
+                              XSL-FO templates.</li>
+                            <li><strong>Oracle BI Publisher</strong>: This
+                              option can be selected if you are using a licensed
+                              version of Oracle BI Publisher. This option
+                              enables you to take report query results and
+                              convert them from XML to RTF format using Oracle
+                              BI Publisher. This option is useful when you want
+                              to upload your own customized RTF or XSL-FO
+                              templates for printing reports within Application
+                              Express.</li>
+                          </ul>
+                          In this tutorial, you use the Oracle Rest Data
+                          Services (ORDS) for PDF printing of a classic report.
+                          ORDS has the FOP libraries actually built into the
+                          listener, thereby making the configuration setup
+                          easy.
+                          <p>Please keep in mind the following while running
+                            this tutorial:</p>
+                          <ul>
+                            <li><strong>Logging into your Oracle Application
+                                Express workspace:</strong> Your Oracle
+                              Application Express workspace may reside in an
+                              on-premises Oracle Database or in Oracle Database
+                              Cloud Services. The login credentials differ
+                              depending on where your workspace is located:
+                              <ul>
+                                <li><strong>Logging into Oracle Application
+                                    Express in a Oracle Database Cloud
+                                    Service:&nbsp;</strong> Reference the Oracle Help Center for
+                                  your Oracle Database Cloud Service. To do
+                                  this, go to the Oracle Help Center for Cloud,
+                                  and select Platform or Infrastructure (depending on your service). From
+                                  here, select your Database Cloud Service and
+                                  the Get Started page will appear.</li>
+                                <li><strong>Logging in to Oracle Application
+                                    Express on-premises:</strong> From your
+                                  browser, go to the location of your
+                                  on-premises installation of your Oracle
+                                  Application Express workspace provided by your
+                                  Workspace Administrator.</li>
+                              </ul>
+                            </li>
+                            <li><strong>Application ID:</strong> Screenshots in
+                              this tutorial show a blurred Application ID. Your
+                              Application ID can be any value assigned
+                              automatically while creating the application.</li>
+                            <li><strong>Schema:</strong> If you are accessing an
+                              Oracle Application Express workspace in Database
+                              Schema Service,&nbsp; you have one schema assigned
+                              to you with a schema name that you cannot change.
+                              If you are accessing the workspace in an
+                              on-premises Oracle database, you may have more
+                              than one schema assigned to your workspace by the
+                              Oracle Application Express Instance Administrator.</li>
+                          </ul>
+                          <h4>What Do You Need?</h4>
+                          <p> Before starting this tutorial, you should:</p>
+                          <ul>
+						  <li>Visit 
+						  <a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud" target="_blank">Oracle Help Center for Cloud.</a>
+						  </li>
+                            <li>Have access to an Oracle Database 11g or later
+                              release, either on-premises or in a Database Cloud
+                              Service.</li>
+                            <li>Install Oracle Application Express Release 5.1
+                              into your Oracle Database (for on-premises only).</li>
+                            <ul>
+                              <ul>
+                              </ul>
+                            </ul>
+                            <li>Provision at least one Oracle Application
+                              Express user. See <a href="http://www.oracle.com/pls/topic/lookup?ctx=E50529&amp;id=AEADM150" target="_blank">Creating
+                                New User Accounts</a> in Oracle Application
+                              Express Administration Guide.</li>
+                            <ul>
+                              <ul>
+                              </ul>
+                            </ul>
+                          </ul>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section1">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Setting up the Print Server From Oracle Application
+                          Express Instance Administration</span></h2>
+                        <div style="display: none;">
+                          <p>Note: This section only applies to Oracle
+                            Application Express on-premises installations or
+                            Database Cloud Services that do not already have the
+                            Print Server setup to Oracle Rest Data Services.</p>
+                          In this section, you log into Oracle Application
+                          Express as an Instance Administrator and select Oracle
+                          REST Data Services (ORDS) as Print Server. Perform the
+                          following steps:<br>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>Open the Oracle Application Express
+                                Administration Services by entering <em>http://hostname:port/apex/apex_admin</em>
+                                in a web browser and press the <strong>Enter </strong>key.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_01.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_01.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Enter <em>admin</em> for User Name, the
+                                Instance Administrator password you specified
+                                when you installed Oracle Application Express
+                                for Password, and click <strong>Sign In to
+                                  Administration</strong>.<br>
+                                <br>
+                                Note: Alternatively, you can enter <em>http://hostname:port/apex/
+                                  </em>in a web browser, and click the Enter
+                                key. Once the Log In screen appears, enter <em>INTERNAL</em>
+                                for Workspace, <em>ADMIN</em> for User Name,
+                                the Instance Administrator password you
+                                specified when you installed Oracle Application
+                                Express for Password, and click <strong>Sign
+                                  In.</strong></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_02.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_02.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>From the Oracle Application Express
+                                Administration home page, click the <strong>down
+                                  arrow</strong> next to Manage Instance, and
+                                select <strong>Instance Settings</strong>. </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_03.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_03.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click the <strong>Report Printing</strong>
+                                tab.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_04.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_04.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select <strong>Oracle REST Data Services </strong>for
+                                Print Server.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_05.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_05.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Apply Changes</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_06.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_06.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>The Report Printing settings are saved. Click <span style="font-weight: bold;">Sign Out</span>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_01_07.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_01_07.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section2">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Creating a Database Application with a Classic
+                          Report</span></h2>
+                        <div style="display: none;"> In this section, you create a database application
+                          with a classic report on EMP table. This classic
+                          report will be used in the next step to enable PDF
+                          printing.<br>
+                          <ol>
+						  <li class="vm-only" style="font-weight: bold; display: none;"><span>
+<p>In the Application Express login page, enter the following login credentials and click <strong>Sign In:</strong></p>
+	<ul>
+		<li><p><strong>Workspace:</strong> obe</p></li>
+        <li><p><strong>Username:</strong> obe</p></li>
+		<li><p><strong>Password:</strong> oracle</p></li>
+	</ul>
+    <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img alt="Login page" src="./RunningPDFReportswithApplicationExpress5.1_files/vm_only.jpg" class="ScreenShot collapsible-outline" title="Login page" style="display: block;"></span>
+	<figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/vm_only.txt">Description of this image</a></figcaption></figure>
+</span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>From the Oracle Application Express home page,
+                                click the <strong>down arrow</strong> next to
+                                Application Builder, and select <strong>Database
+                                  Applications</strong>. </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_01.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_01.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Create</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_02.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_02.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Accept the default, and click <strong>Next
+                                  &gt;</strong>.<em><br>
+                                </em></p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_03.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_03.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Enter <span style="font-style: italic;">PDF
+                                  Report Printing</span> for Name, and click <strong>Next
+                                  &gt;</strong>.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_04.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_04.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>You want to add a Classic Report to this
+                                application. Click <strong>Add Page</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_05.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_05.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select the <strong>Report </strong>icon.
+                                Select <strong>Home(1)</strong> for Parent
+                                Page, <strong>Table </strong>for Page Source,
+                                <strong>EMP </strong>for Table Name, <strong>Classic
+                                  </strong>for Report Type, and click <strong>Add
+                                  Page</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_06.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 643px; height: 480px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_06.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Next &gt;</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_07.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_07.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Accept the default, and click <strong>Next
+                                  &gt;</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_08.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_08.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Select <strong>Application Express Accounts</strong>
+                                for Authentication Scheme, and click <strong>Next
+                                  &gt;</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_09.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 595px; height: 389px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_09.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Create Application</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_10.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 583px; height: 496px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_10.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click the <strong>Run Application</strong>
+                                icon.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_11.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 575px; height: 477px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_11.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Enter your Oracle Application Express
+                                credentials, and click <strong>Log In</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_12.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_12.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>The PDF Report Printing application's home page
+                                loads. Click <strong>Emp </strong>in the
+                                navigation menu.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_13.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_13.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Scroll down to the end of the report, and
+                                notice that it does not have a Print option. In
+                                the next section, you will enable PDF Printing
+                                for this report. Click <strong>Edit Page 2</strong>
+                                in the developer toolbar.<br>
+                              </p>
+                              <figure><div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_02_14.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 610px; height: 453px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_02_14.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="section3">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Enabling PDF Printing for the Classic Report</span></h2>
+                        <div style="display: none;"> In this section, you enable PDF printing for the
+                          classic report you have created in the previous
+                          section. Perform the following steps:<br>
+                          <ol>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the Rendering tab, under EMP, click <strong>Attributes</strong>.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_01.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_01.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>In the property editor, under Printing, select
+                                <strong>Yes </strong>for Enabled.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_02.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_02.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Click <strong>Save and Run Page</strong>.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_03.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_03.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Scroll down to the end of the report. Notice
+                                that Print option is now included in this
+                                report. Click <strong>Print</strong>.<br>
+                              </p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_04.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 644px; height: 440px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_04.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>A dialog to save the report as a PDF file,
+                                opens. Click <strong>Save</strong>.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_05.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_05.txt">Description
+                                    of this image</a></figcaption> </figure>
+                            </span></li>
+                            <li style="font-weight: bold;"><span>
+                              <p>Open the saved PDF file to see the report
+                                details. It also has option to print this report
+                                to a printer.</p>
+                              <figure> <div class="view-button btn btn-primary" style="display:none;">View Image</div><span class="collapsible-wrapper" style="position:relative"><span class="collapsible-icon ui-icon ui-icon-closethick"></span><img src="./RunningPDFReportswithApplicationExpress5.1_files/PDF_Printing_03_06.png" class="ScreenShot collapsible-outline" style="border: 1px solid gray; width: 669px; height: 596px; display: block;"></span>
+                                <figcaption><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/files/PDF_Printing_03_06.txt">Description
+                                    of this image</a></figcaption></figure>
+                            </span></li>
+                          </ol>
+                        </div>
+                      </section>
+                      <section>
+                        <a id="summary">&nbsp;</a><h2 class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false" style="text-align: left;"><span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Want to Learn More?</span></h2>
+                        <div style="display: none;">
+                          <ul>
+                            <li><a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud&amp;id=HTMDB05033" target="_blank">Printing
+                                Report Regions</a></li>
+                            <li>
+                              <p><span style="font-weight: normal;"><a href="http://cloud.oracle.com/" target="_blank">Oracle
+                                    Cloud Home Page</a></span></p>
+                              <span style="font-weight: normal;"> </span></li>
+                            <li><span style="font-weight: normal;"></span><span style="font-weight: normal;">Other tutorials on
+                                <a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud&amp;id=dbcstutorials" target="_blank">Oracle
+                                  Database Cloud Service - Database Schema
+                                  Service</a> <br>
+                              </span></li>
+                            <li>
+                              <p><span style="font-weight: normal;"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491" target="_blank">Oracle
+                                    Application Express Learning Library</a></span></p>
+                            </li>
+                            <li><span style=" font-weight: normal;"><a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html" target="_blank">Oracle
+                                  Technology Network Application Express Home
+                                  Page<br>
+                                </a></span></li>
+                            <a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html">
+                              <div>
+                                <ul>
+                                </ul>
+                              </div>
+                              <br>
+                            </a>
+                          </ul>
+                          <a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html">
+                          </a></div>
+                        <a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html">
+                        </a></section>
+                      <a href="http://www.oracle.com/technetwork/developer-tools/apex/overview/index.html">
+                      </a><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"="">
+                        <!-- END Article --> </a></div>
+                    <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></article>
+                  <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></div>
+                <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></div>
+              <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></div>
+            <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></div>
+          <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></div>
+        <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong> </strong></a></main>
+      <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> <strong>
+          <!-- footer of the page --> </strong></a><strong>
+        <footer id="footer"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+          <div class="f1"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+            <div class="holder"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+              <div class="container-fluid"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+                <div class="pull-left footer-left"><a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+                  <ul class="footer-nav list-inline">
+                    <a href="https://apexapps.oracle.com/pls/apex/f?p=44785:141:0::NO:141:P141_PAGE_ID,P141_SECTION_ID:64,491%3EOracle%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20Application%20Express%20Learning%20Library%3C/a%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/span%3E%3C/li%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/ul%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/div%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C/section%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Csection%3E%3Cbr%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3Cspan%20style=" font-weight:="" normal;"=""> </a>
+                    <li class="separator" style="height: 17px;"><a href="http://www.oracle.com/corporate/index.html">About
+                        Oracle</a></li>
+                    <li style="height: 17px;"><a href="http://www.oracle.com/us/corporate/contact/index.html">Contact
+                        Us</a></li>
+                    <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/index.html">Legal
+                        Notices</a></li>
+                    <li style="height: 17px;"><a href="http://www.oracle.com/us/legal/terms/index.html">Terms
+                        of Use</a></li>
+                    <li class="same-height-right" style="height: 17px;"><a href="http://www.oracle.com/us/legal/privacy/index.html">Your
+                        Privacy Rights</a></li>
+                  </ul>
+                  <span class="copyright">Copyright © 2015, Oracle and/or its
+                    affiliates. All rights reserved.</span> </div>
+                <!-- insert lan options --> </div>
+            </div>
+          </div>
+        </footer>
+        <!-- allow a user to go to the top of the page --> <a class="accessibility" href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html#wrapper">Back to top</a> </strong></div>
+    <strong>
+      <!-- begin codemirror here -->
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/runmode-standalone.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/clike.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/sql.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/xml.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/javascript.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/css.js.download"></script>
+      <script type="text/javascript" src="./RunningPDFReportswithApplicationExpress5.1_files/htmlmixed.js.download"></script>
+      <script type="text/javascript">
+    var config;
+
+    config = {
+        lineNumbers: true,
+        mode : "xml",
+    htmlMode: true,
+        indentWithTabs: false,
+        readOnly: true
+    };
+
+    </script>
+      <!-- end codemirror here --> </strong>
+  
+
+</body></html>

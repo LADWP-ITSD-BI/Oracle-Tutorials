@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .FitContent {
+            display: inherit;
+        }
+    </style>
+    <title>APEX Help Page</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg container-fluid" style="min-height: 100px; background-color:#30a9f2;">
+            <div class="col-1">
+                <a class="navbar-brand text-white" href="#">LADWP</a>
+            </div>
+            <div class="col"></div>
+            <div class="col-3 justify-content-end">
+                <div class="align-self-end" style="text-align: end">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                
+                
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                    <!-- <li class="nav-item active">
+                        <a class="nav-link text-white" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li> -->
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Videos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">APEX</a>
+                        <a class="dropdown-item" href="#">OBIEE</a>
+                        <a class="dropdown-item" href="#">ETL Pipeline</a>
+                        </div>
+                    </li> -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Help Pages
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <button class="dropdown-item" onclick="showDiv('APEX');" >APEX</button>
+                        <button class="dropdown-item" onclick="showDiv('OBIEE');">OBIEE</button>
+                        <!-- <div class="dropdown-divider"></div> -->
+                        <!-- <a class="dropdown-item" href="#">ETL Pipeline</a> -->
+                        </div>
+                    </li>
+                    <!--li class="nav-item">
+                        <a class="nav-link disabled" href="#">Disabled</a>
+                    </li-->
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="APEXHelpDiv" class="row">
+            <div class="col-9">
+                <div class="container-fluid mt-4">
+                    <h1 class="mx-auto" style="width: 300px;">APEX Help Page</h1>
+                </div>
+                <div class="container-fluid mt-4">
+                    <div><h2 class="mx-auto" style="text-align: center;" id="DeveloperGuide">Developer Guide with Tutorials and Videos</h2></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="CreatinganApplicationfromaSpreadsheet"></h3></div>
+                    <div style="text-align: center"><iframe width="100%" height="415" src="./LabMaterials/CreatinganApplicationExpressDatabaseApplicationfromaSpreadsheet.html" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html" target="_self">https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/appfromcsv/index.html</a></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="AddingChartstoApplicationExpress"></h3></div>
+                    <div style="text-align: center"><iframe width="100%" height="415" src="./LabMaterials/AddingChartstoApplicationExpress5.1.html" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html" target="_self">https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/charts/charts.html</a></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="VideoCreatinganApplicationfromaSpreadsheet">Video: Creating an Application from a Spreadsheet</h3></div>
+                    <div style="text-align: center"><iframe width="560" height="315" src="https://www.youtube.com/embed/clhodB5aGeg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://www.youtube.com/watch?v=clhodB5aGeg" target="_self">https://www.youtube.com/watch?v=clhodB5aGeg</a></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="RunningPDFReportswithApplicationExpress"></h3></div>
+                    <div style="text-align: center"><iframe width="100%" height="415" src="./LabMaterials/RunningPDFReportswithApplicationExpress5.1.html" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html" target="_self">https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/pdf_printing/pdf_printing.html</a></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="BuildingMobileWebApplication"></h3></div>
+                    <div style="text-align: center"><iframe class=""  width="100%" height="415" src="./LabMaterials/BuildingMobileWebApplication.html" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/mobile_web_app/mobile_web_app.html#overview" target="_self" >https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/apex/r51/mobile_web_app/mobile_web_app.html#overview</a></div>
+                </div>
+            </div>
+            <div class="col pt-1" style="margin: 175px 0 0 0; background-color: #dddddd;">
+                <div class="p-3" style="position: fixed;">
+                    <a href="#CreatinganApplicationfromaSpreadsheet" class="mx-auto" >Creating an Application from a Spreadsheet</a><br>
+                    <a href="#AddingChartstoApplicationExpress" class="mx-auto" >Adding Charts to an Application</a><br>
+                    <a href="#VideoCreatinganApplicationfromaSpreadsheet" class="mx-auto" >Video: Creating an Application from a Spreadsheet</a><br>
+                    <a href="#RunningPDFReportswithApplicationExpress" class="mx-auto" >Running PDF Reports</a><br>
+                    <a href="#BuildingMobileWebApplication" class="mx-auto" >Building a Mobile Web Application</a><br>
+                </div>
+            </div>
+        </div>
+        <div id="OBIEEHelpDiv" class="row" style="display: none">
+            <div class="col-9">
+                <div class="container-fluid mt-4">
+                    <h1 class="mx-auto" style="width: 310px;">OBIEE Help Page</h1>
+                </div>
+                <div class="container-fluid mt-4">
+                    <div><h2 class="mx-auto" style="text-align: center;" id="DeveloperGuide">Developer Guide with Tutorials and Videos</h2></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="ExploreandAddData">Explore and Add Data</h3></div>
+                    <div style="text-align: center"><iframe width="100%" height="415" src="https://docs.oracle.com/middleware/12213/biee/biee-explore.htm" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://docs.oracle.com/middleware/12213/biee/biee-explore.htm" target="_self">https://docs.oracle.com/middleware/12213/biee/biee-explore.htm</a></div>
+                </div>
+                <div class="container-fluid mt-5">
+                    <div><h3 id="CreatingAnalysesandDashboards">Creating Analyses and Dashboards</h3></div>
+                    <div style="text-align: center"><iframe width="100%" height="415" src="https://docs.oracle.com/middleware/12213/biee/BIEUG/GUID-EF3F4409-A734-4FD9-9967-8F027FACAEDB.htm#BIEUG101" frameborder="0" allowfullscreen></iframe></div>
+                    <div style="text-align: center"><a href="https://docs.oracle.com/middleware/12213/biee/BIEUG/GUID-EF3F4409-A734-4FD9-9967-8F027FACAEDB.htm#BIEUG101" target="_self">https://docs.oracle.com/middleware/12213/biee/BIEUG/GUID-EF3F4409-A734-4FD9-9967-8F027FACAEDB.htm#BIEUG101</a></div>
+                </div>
+            </div>
+            <div class="col pt-1" style="margin: 175px 0 0 0; background-color: #dddddd;">
+                <div class="p-3" style="position: fixed;">
+                    <a href="#ExploreandAddData" class="mx-auto" >Explore and Add Data</a><br>
+                    <a href="#CreatingAnalysesandDashboards" class="mx-auto" >Creating Analyses and Dashboards</a><br>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script>
+            window.onload = function(e) {
+                console.log("window.onload");
+                // var images = document.querySelectorAll("img");
+                // console.log(JSON.stringify(images[0].src));
+                //https://apexd.joint.ladwp.com:4443/pls/apex/r/esmmws1/211/files/static/v2/apexarchitecture.png
+            }
+            function showDiv(e)
+            {
+                if( e === "APEX")
+                {
+                    console.log("show APEX");
+                    var APEXHelpDiv = document.getElementById("APEXHelpDiv");
+                    APEXHelpDiv.style.display = "flex";
+                    var OBIEEHelpDiv = document.getElementById("OBIEEHelpDiv");
+                    OBIEEHelpDiv.style.display = "none";
+                    console.log("show APEX");
+                }
+                if( e === "OBIEE")
+                {
+                    var APEXHelpDiv = document.getElementById("APEXHelpDiv");
+                    APEXHelpDiv.style.display = "none";
+                    var OBIEEHelpDiv = document.getElementById("OBIEEHelpDiv");
+                    OBIEEHelpDiv.style.display = "flex";
+                    console.log("show OBIEE");
+                }
+            }
+        </script>
+  </body>
+</html>
